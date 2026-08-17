@@ -1,38 +1,58 @@
 # Medical Report Explainer
 
-An LLM-powered patient empowerment application that translates complex diagnostic imaging reports, pathology results, and laboratory summaries into plain, empathetic, and easily understandable language.
+A medical NLP web application powered by Flask and local Large Language Models (via LM Studio) that translates complex diagnostic reports and clinical jargon into clear, concise, patient-friendly explanations.
 
 ---
 
 ## Overview
 
-Medical reports are filled with dense clinical jargon that causes patient anxiety and confusion. Medical Report Explainer parses technical diagnostic documents (e.g., radiology reports, blood work panels) and generates clear, structured layman explanations, vocabulary breakdowns, and recommended follow-up questions for patients to ask their physicians.
+Medical reports often contain dense terminology that creates anxiety and confusion for patients. **Medical Report Explainer** provides an interface where patients can upload `.pdf` or `.txt` reports, or paste medical text directly. The system extracts the text and uses a locally hosted LLM to identify difficult terms and produce simple, accessible explanations.
 
 ## Key Features
 
-- Jargon Translation Engine: Converts complex clinical terminology into accessible reading levels without losing clinical meaning.
-- Structured Explanations: Produces a structured summary covering Key Findings, What This Means, Glossary of Terms, and Questions for Your Doctor.
-- Safety & Disclaimer Guardrails: Enforces clear non-diagnostic disclaimers and safety guidance encouraging physician consultation.
+- **Multi-Format Document Ingestion**: Upload `.pdf` or `.txt` files with server-side extraction via PyPDF2.
+- **Local LLM Inference**: Direct connection to local inference servers (e.g., LM Studio) via the OpenAI API protocol for private, on-premise processing.
+- **Structured Explanations**: Standardized `Term: [term]` and `Explanation: [simple explanation]` output format.
+- **Side-by-Side Interface**: Dual-column web dashboard with Axios asynchronous uploads and live response rendering.
 
 ## Tech Stack
 
-- LLM Pipeline: Python, OpenAI API
-- Document Ingestion: PyPDF2, pdfplumber, Tesseract OCR
-- Web Interface: Streamlit / React
+- **Backend**: Python 3.8+, Flask, Werkzeug
+- **Document Extraction**: PyPDF2
+- **LLM Client**: OpenAI Python SDK (LM Studio backend)
+- **Frontend**: HTML5, CSS3, JavaScript, Axios
+
 
 ## Installation & Setup
 
 ```bash
+# 1. Clone the repository
 git clone https://github.com/junxiant/Med-Report-Explainer.git
 cd Med-Report-Explainer
 
-pip install -r requirements.txt
+# 2. Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Set up API Key
-export OPENAI_API_KEY="your-api-key"
+# 3. Install dependencies
+pip install flask werkzeug pypdf2 openai
+```
 
-# Run application
-streamlit run app.py
+## Running the App
+Start LM Studio:
+
+Load your preferred local LLM (e.g., Llama, Mistral, Gemma).
+
+Start the local server (default: http://localhost:1234/v1 or your host IP).
+
+Configure app.py:
+
+Set base_url and MODEL_IDENTIFIER to match your local LM Studio configuration.
+Start Flask Server:
+
+```
+python app.py
+Access the dashboard at http://127.0.0.1:5000.
 ```
 
 Author Jun Tan
