@@ -16,7 +16,7 @@ Medical reports are filled with dense clinical jargon that causes patient anxiet
 
 ## Tech Stack
 
-- LLM Pipeline: Python, LangChain, OpenAI API / Anthropic Claude
+- LLM Pipeline: Python, OpenAI API
 - Document Ingestion: PyPDF2, pdfplumber, Tesseract OCR
 - Web Interface: Streamlit / React
 
